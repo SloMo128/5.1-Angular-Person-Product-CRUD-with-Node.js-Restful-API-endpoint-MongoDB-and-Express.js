@@ -1,0 +1,41 @@
+<div *ngIf="!isLoading" class="text-center">
+  <div class="alert alert-success" [ngClass]="feedback.feedbackType === 'success'
+            ? 'alert-success'
+            : 'alert-danger'
+        " role="alert" style="height: 50px" [ngStyle]="!feedback.feedbackmsg">
+    {{
+    feedback.feedbackmsg + " Please try again later."
+    }}
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th>Id</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>E-Mail</th>
+      <th>Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of people let i = index">
+      <td>{{person._id}}</td>
+      <td><a [routerLink]="['/personedit/']" (click)="saveDataAndNavigate(person._id)">{{person.firstname}}</a></td>
+      <td>{{person.lastname}}</td>
+      <td>{{person.email}}</td>
+
+      <td class="text-center">
+        <button type="submit" (click)="saveDataAndNavigate(person._id)" style="background-color:rgb(22, 218, 22)"
+          class="btn btn-success">
+          <img src="assets\img\edit.png" Style="width:30px;height:30px" />
+        </button>
+
+        <button type="submit" (click)="deletePerson(person._id, i)" style="background-color:red" class="btn btn-danger">
+          <img src="assets\img\delete.png" Style="width:30px;height:30px" />
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

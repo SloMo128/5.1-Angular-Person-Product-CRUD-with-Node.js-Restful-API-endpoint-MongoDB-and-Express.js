@@ -1,0 +1,56 @@
+<div *ngIf="!isLoading" class="text-center">
+    <div class="alert alert-success" [ngClass]="feedback.feedbackType === 'success'
+              ? 'alert-success'
+              : 'alert-danger'
+          " role="alert" style="height: 50px" [ngStyle]="!feedback.feedbackmsg">
+      {{
+        feedback.feedbackmsg + " Please try again later."
+      }}
+    </div>
+  </div>
+  
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <form [formGroup]="productsForm" (ngSubmit)="filterProducts()">
+      <div>
+        <label for="search">Search: </label>
+        <input id="search" type="text" formControlName="search">
+        <button (click)="filterProducts()" class="btn btn-success" >search</button>
+      </div>
+    </form>
+    <button *ngIf="isLoggedIn" type="submit" class="btn btn-success" routerLinkActive="active"
+      [routerLink]="['/productcreate']" >Create Product</button>
+  </div>
+  
+  <table class="table table-bordered" *ngIf="isLoadingProduct">
+    <thead class="thead-light">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Company</th>
+        <th>Price</th>
+        <th *ngIf="isLoggedIn">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products let i = index">
+        <td><a [routerLink]="['/productedit/']" (click)="saveDataAndNavigate(product._id)">{{product.title}}</a></td>
+        <td>{{product.description}}</td>
+        <td>{{product.company}}</td>
+        <td>{{product.price}}</td>
+  
+        <td class="text-center" *ngIf="isLoggedIn">
+  
+          <button type="submit" (click)="saveDataAndNavigate(product._id)" style="background-color:rgb(22, 218, 22)"
+            class="btn btn-success">
+            <img src="assets\img\edit.png" Style="width:30px;height:30px" />
+          </button>
+  
+          <button type="submit" (click)="deleteProduct(product._id, i)" style="background-color:red"
+            class="btn btn-danger">
+            <img src="assets\img\delete.png" Style="width:30px;height:30px" />
+          </button>
+  
+        </td>
+      </tr>
+    </tbody>
+  </table>

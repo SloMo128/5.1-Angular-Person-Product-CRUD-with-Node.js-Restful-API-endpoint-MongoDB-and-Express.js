@@ -1,0 +1,105 @@
+<!-- check for database, network or other errors-->
+<div *ngIf="!isLoading" class="text-center">
+    <div class="alert alert-success" [ngClass]="feedback.feedbackType === 'success'
+              ? 'alert-success'
+              : 'alert-danger'
+          " role="alert" style="height: 50px" [ngStyle]="!feedback.feedbackmsg">
+        {{
+        feedback.feedbackmsg + " Please try again later."
+
+        }}
+    </div>
+</div>
+
+<div *ngIf="isLoading" class="alert" class="text-center">
+    {{ feedback.feedbackmsg }}
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-4 register-person">
+        <!-- form card register -->
+        <div class="card card-outline-secondary">
+            <div class="card-header">
+                <h3 class="mb-0">Edit Person</h3>
+            </div>
+
+            <div class="card-body" style="text-align:center">
+                <form novalidate [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                    <div>
+                        <p>
+                            <label for="firstname">Firstname</label>
+                            <input type="text" id="firstname" firstname="firstname" class="form-control"
+                                formControlName="firstname" [ngClass]="{'is-invalid': firstname.invalid && firstname.dirty,
+                                              'is-valid': firstname.valid && firstname.dirty}">
+                        </p>
+                        <div *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)" class="error">
+                            <div *ngIf="firstname.errors.required">
+                                firstname is required</div>
+                            <div *ngIf="firstname.errors.minlength && firstname.touched">
+                                firstname Minimum Length is {{ firstname.errors.minlength.requiredLength }}
+                            </div>
+                            <div *ngIf="firstname.errors.maxlength && firstname.touched">
+                                firstname Maximum Length is {{ firstname.errors.maxlength.requiredLength }}
+                            </div>
+                            <div *ngIf="firstname.errors.pattern">
+                                Only characters - not spaces - are allowed.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <p>
+                            <label for="lastname">Lastname</label>
+                            <input type="text" id="lastname" firstname="lastname" formControlName="lastname"
+                                class="form-control" [ngClass]="{'is-invalid': lastname.invalid && lastname.dirty,
+                  'is-valid': lastname.valid && lastname.dirty}">
+                        </p>
+                        <div *ngIf="!lastname.valid && (lastname.dirty || lastname.touched)" class="error">
+                            <div *ngIf="lastname.errors.required">
+                                lastname is required</div>
+                            <div *ngIf="lastname.errors.minlength && lastname.touched">
+                                lastname Minimum Length is {{ lastname.errors.minlength.requiredLength }}
+                            </div>
+                            <div *ngIf="lastname.errors.maxlength && lastname.touched">
+                                lastname Maximum Length is {{ lastname.errors.maxlength.requiredLength }}
+                            </div>
+                            <div *ngIf="lastname.errors.pattern">
+                                Only characters - not spaces - are allowed.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p>
+                            <label for="email">E-mail</label>
+                            <input type="text" id="email" firstname="email" class="form-control" formControlName="email"
+                                [ngClass]="{'is-invalid': email.invalid && email.dirty,
+                                              'is-valid': email.valid && email.dirty}">
+                        </p>
+                        <div *ngIf="!email.valid && (email.dirty || email.touched)" class="error">
+                            <p *ngIf="email.errors.required">
+                                email is required
+                            </p>
+                            <p *ngIf="email.errors.minlength && email.touched">
+                                email Minimum Length is {{ email.errors.minlength.requiredLength }}
+                            </p>
+                            <p *ngIf="email.errors.maxlength && email.touched">
+                                email Maximum Length is {{ email.errors.maxlength.requiredLength }}
+                            </p>
+                            <p *ngIf="email.errors.pattern">
+                                Only characters - not spaces - are allowed.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-success" type="submit" [disabled]="!editForm.valid">Update</button><br><br>
+                    <a class="btn btn-success" [routerLink]="['/listperson']">Back to person list</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <app-root-product-list></app-root-product-list>
+    <app-root-footer></app-root-footer>
+</div>
