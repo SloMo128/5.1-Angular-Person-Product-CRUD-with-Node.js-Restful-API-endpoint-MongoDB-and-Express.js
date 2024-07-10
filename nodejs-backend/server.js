@@ -53,9 +53,6 @@ app.use(config.apiProductURL, apiProductURL);
 const apiUserLoginURL = require('./Routes/routes.user.login');
 app.use(config.apiUserLogin, apiUserLoginURL);
 
-// Activate all possible routes for all REST endpoints and their CRUD operations HttpError
-const apiHttpErrorURL = require('./Routes/router.http.error');
-app.use(config.apiHttpError, apiHttpErrorURL);
 
 // Find 404 and hand over to error handler
 app.use('*', function (req, res) {

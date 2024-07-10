@@ -1,15 +1,8 @@
 const Product = require('../Models/product.model');
+const PersonProductModel = require("../Models/person.product.model");
 
 function isEmpty(obj) {
-    /*
-      for (var prop in obj) {
-          if (obj.hasOwnProperty(prop))
-              return false;
-      }
-    */
 
-    // Check if an Object is Empty with JSON.stringify()
-    // This will return true if the object is empty, otherwise false
     return JSON.stringify(obj) === JSON.stringify({});
 }
 
@@ -29,14 +22,49 @@ exports.findAll = (req, res) => {
         });
 };
 
-exports.findByQuery = (req, res) => {
-    const product_id = req.params.product_id;
+//PRENDE L'ID DELLA PERSONA E STAMPA I PRODOTTI
+exports.findByQueryPersonProduct = (req, res) => {
+    const person_id = req.params.person_id;
 
-    Product.find({ product: product_id })
+    PersonProductModel.find({ person_id: person_id })
+        .then(productPerson => {
+            if (productPerson.length === 0) {
+                return res.status(404).json({
+                    message: `Product with this product id ${person_id} not found `
+                });
+            }
+            
+            const productId = productPerson.map(pp => pp.product_id);
+
+            Product.find({_id: {$in: productId}})
+            .then(product =>{
+                if(product.length === 0){
+                    return res.status(404).json({
+                        message: `Product with id not found `
+                    });
+                }
+                res.send(product);
+            }).catch(err => {
+                res.status(500).send({
+                    message: err.message || "Something wrong while retrieving Product."
+                });
+            });
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Something wrong while retrieving Product."
+            });
+        });
+};
+
+//FIND PRODUCT BI ID PERSON
+exports.findByQuery = (req, res) => {
+    const person_id = req.params.person_id;
+
+    Product.find({ product: person_id })
         .then(product => {
             if (product.length === 0) {
                 return res.status(404).json({
-                    message: `Product with this product id ${product_id} not found `
+                    message: `Product with this product id ${person_id} not found `
                 });
             }
             res.send(product);

@@ -44,7 +44,7 @@ export class ProductListComponent implements OnInit {
             return;
         }
 
-        this.getProducts(this.data);
+        this.getPersonProduct(this.data);
 
         let storeDataAdm = localStorage.getItem("isAdmLoggedIn");
         let storeDataSal = localStorage.getItem("isSalLoggedIn");
@@ -57,9 +57,9 @@ export class ProductListComponent implements OnInit {
         }
     }
 
-    getProducts(id: string): void {
+    getPersonProduct(person_id: string): void {
         this.products = [];
-        this.productService.getProducts(id).subscribe({
+        this.productService.getPersonProduct(person_id).subscribe({
             next: (data: Product[]) => {
                 if (data.length !== 0) {
                     this.products = data;

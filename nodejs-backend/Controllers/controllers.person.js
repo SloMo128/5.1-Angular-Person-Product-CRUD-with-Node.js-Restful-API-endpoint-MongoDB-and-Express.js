@@ -1,15 +1,6 @@
 const Person = require('../Models/person.model');
 
 function isEmpty(obj) {
-    /*
-      for (var prop in obj) {
-          if (obj.hasOwnProperty(prop))
-              return false;
-      }
-    */
-
-    // Check if an Object is Empty with JSON.stringify()
-    // This will return true if the object is empty, otherwise false
     return JSON.stringify(obj) === JSON.stringify({});
 }
 

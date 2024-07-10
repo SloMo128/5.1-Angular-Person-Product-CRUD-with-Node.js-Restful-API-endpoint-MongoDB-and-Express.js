@@ -12,7 +12,7 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem('productId');
     
-    let storeDataAdm = localStorage.getItem("isAdmLoggedIn");
+    /*let storeDataAdm = localStorage.getItem("isAdmLoggedIn");
     let storeDataSal = localStorage.getItem("isSalLoggedIn");
     let storeDataUsr = localStorage.getItem("isUsrLoggedIn");
 
@@ -20,6 +20,6 @@ export class FooterComponent implements OnInit {
       this.isLoggedIn = false;
     } else if (storeDataSal != null && storeDataSal == "true") {
       this.isLoggedIn = true;
-    }
+    }*/
   }
 }
