@@ -51,7 +51,7 @@ export class ProductApiService {
 
     // Metodo per eliminare un'associazione PersonProd   
     deleteAssociation(person_id: string, product_id: string): Observable<any> {
-        const url = `${this.baseURL}/delete/${person_id}/${product_id}`;
+        const url = `${this.baseURL}deleteInter/${person_id}/${product_id}`;
         return this.http.delete<any>(url)
     }
 

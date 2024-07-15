@@ -22,6 +22,7 @@ export class ProductListComponent implements OnInit {
     isLoggedIn: boolean = false;
     productsForm: FormGroup;
     associations: any;
+    personId: string;
 
     constructor(
         private productService: ProductApiService,
@@ -85,14 +86,15 @@ export class ProductListComponent implements OnInit {
             },
         });
     }
+    
     // Metodo per eliminare un'associazione
-    deleteAssociation(personId: string, productId: string, index: number) {
-
+    deleteAssociation(productId: string, index: number) {
+        this.personId = this.data;
         if (window.confirm("Are you sure you want to delete this association?")) {
-            this.productService.deleteAssociation(personId, productId).subscribe({
-                next: (response) => {
+            this.productService.deleteAssociation(this.personId, productId).subscribe({
+                next: () => {
                     // Rimuovi l'associazione dall'array           
-                    this.associations.splice(index, 1);
+                    this.products.splice(index, 1);
                     // Aggiorna localStorage se necessario           
                     localStorage.removeItem('products');
                 }, error: (error) => {
