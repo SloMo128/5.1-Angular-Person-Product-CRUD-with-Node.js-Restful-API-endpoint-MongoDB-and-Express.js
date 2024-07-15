@@ -11,6 +11,7 @@ import { PersonCreateComponent } from '../Pages/Persons/Person-Create/person.cre
 import { ProductAllListComponent } from '../Pages/Products/Product-All-List/product.all.component';
 import { ProductEditComponent } from '../Pages/Products/Product-Edit/product.edit.component';
 import { ProductCreateComponent } from '../Pages/Products/Product-Create/product.create.component';
+import { ProductAddComponent } from '../Pages/Products/Product-Add/product.add.component';
 
 import { LoginComponent } from '../Authentication/login.component';
 import { LogoutComponent } from '../Authentication/logout.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'personcreate', component: PersonCreateComponent },
 
   { path: 'productlist', component: ProductAllListComponent },
+  { path: 'addproduct', component: ProductAddComponent },
   { path: 'productedit', component: ProductEditComponent, canActivate: [ProductGuard]},
   { path: 'productcreate', component: ProductCreateComponent },
 

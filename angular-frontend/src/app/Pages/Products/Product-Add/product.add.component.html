@@ -1,0 +1,47 @@
+<div *ngIf="!isLoading" class="text-center">
+    <div class="alert" [ngClass]="feedback.feedbackType === 'success' ? 'alert-success' : 'alert-danger'" role="alert"
+        style="height: 50px" *ngIf="feedback.feedbackmsg">
+        {{ feedback.feedbackmsg }}
+    </div>
+</div>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <form [formGroup]="searchForm" (ngSubmit)="filterProducts()">
+        <div>
+            <label for="search">Search: </label>
+            <input id="search" type="text" formControlName="search">
+            <button type="submit" class="btn btn-success">Search</button>
+            <button type="button" class="btn btn-primary" (click)="addProductPerson()">Add Product to List</button>
+        </div>
+    </form>
+</div>
+
+<form [formGroup]="productsForm">
+    <div>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Company</th>
+                    <th>Price</th>
+                    <th class="text-center">Select</th>
+                </tr>
+            </thead>
+            <tbody formArrayName="products">
+                <tr *ngFor="let productCtrl of productsForm.controls.products.controls; let i = index"
+                    [formGroupName]="i">
+                    <td>{{productCtrl.value.title}}</td>
+                    <td>{{productCtrl.value.description}}</td>
+                    <td>{{productCtrl.value.company}}</td>
+                    <td>{{productCtrl.value.price}}</td>
+                    <td>
+                        <div class="text-center">
+                            <input class="form-check-input" type="checkbox" formControlName="selected">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

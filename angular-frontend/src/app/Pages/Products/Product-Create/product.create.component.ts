@@ -15,7 +15,7 @@ export class ProductCreateComponent implements OnInit {
 
     createForm: FormGroup;
     products: Product[] = []
-    product = new Product("", "", "", "");
+    product = new Product("", "", "", "", false);
     feedback = new FeedBack("", "");
     data: string;
     isLoading: boolean = true;
@@ -49,7 +49,7 @@ export class ProductCreateComponent implements OnInit {
     }
 
     onSubmit() {
-        this.productService.addProduct(this.createForm.value).subscribe({
+        this.productService.addList(this.createForm.value).subscribe({
             next: (data) => {
                 this.feedback = { feedbackType: 'success', feedbackmsg: 'Porduct add successfully!' };
                 setTimeout(() => this.router.navigate(['/personedit']), 4000);

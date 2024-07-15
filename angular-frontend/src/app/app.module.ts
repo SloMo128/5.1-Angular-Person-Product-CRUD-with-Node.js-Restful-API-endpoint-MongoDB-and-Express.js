@@ -22,6 +22,7 @@ import { ProductAllListComponent } from './Pages/Products/Product-All-List/produ
 import { ProductListComponent } from './Pages/Products/Product-List/product.list.component';
 import { ProductEditComponent } from './Pages/Products/Product-Edit/product.edit.component';
 import { ProductCreateComponent } from './Pages/Products/Product-Create/product.create.component';
+import { ProductAddComponent } from './Pages/Products/Product-Add/product.add.component';
 
 import { GlobalErrorHandlerService } from './Services/global-error-handler.service';
 import { GlobalHttpInterceptorService } from './Services/global-http-Interceptor.service';
@@ -33,7 +34,7 @@ import { ErrorCodeService } from './Services/http.error.service';
 import { AuthService } from './Services/auth.service';
 
 
-@NgModule({
+@NgModule({//DIRETTIVA
   declarations: [
     AppComponent,
     PageNotFoundComponent,
@@ -47,6 +48,7 @@ import { AuthService } from './Services/auth.service';
     ProductListComponent,
     ProductEditComponent,
     ProductCreateComponent,
+    ProductAddComponent,
     LoginComponent,
     LogoutComponent
   ],

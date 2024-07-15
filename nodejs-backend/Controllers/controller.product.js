@@ -33,27 +33,38 @@ exports.findByQueryPersonProduct = (req, res) => {
                     message: `Product with this product id ${person_id} not found `
                 });
             }
-            
+
             const productId = productPerson.map(pp => pp.product_id);
 
-            Product.find({_id: {$in: productId}})
-            .then(product =>{
-                if(product.length === 0){
-                    return res.status(404).json({
-                        message: `Product with id not found `
+            Product.find({ _id: { $in: productId } })
+                .then(product => {
+                    if (product.length === 0) {
+                        return res.status(404).json({
+                            message: `Product with id not found `
+                        });
+                    }
+                    res.send(product);
+                }).catch(err => {
+                    res.status(500).send({
+                        message: err.message || "Something wrong while retrieving Product."
                     });
-                }
-                res.send(product);
-            }).catch(err => {
-                res.status(500).send({
-                    message: err.message || "Something wrong while retrieving Product."
                 });
-            });
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Something wrong while retrieving Product."
             });
         });
+};
+
+exports.addProductPerson = async (req, res) => {
+    PersonProductModel.create(req.body)
+        .then(pp => {
+            res.send(pp)
+        }).catch(err =>{
+            res.status(500).send({
+                message: err.message || "Something went wrong while creating the Person."
+            })
+        })
 };
 
 //FIND PRODUCT BI ID PERSON
@@ -87,13 +98,12 @@ exports.findProducts = (req, res) => {
     }
     Product.find(queryObj)
         .then(data => {
-            if(data.length === 0){
+            if (data.length === 0) {
                 res.status(400).json({
                     message: "Nessn prodotto tovato"
                 });
             }
-            else
-            {
+            else {
                 res.status(200).json(data);
             }
         })

@@ -66,7 +66,7 @@ export class ProductListComponent implements OnInit {
                 }
             },
             error: (err: any) => {
-                if (err.feedbackType === 404) {
+                if (err.feedbackType === 404 || err.feedbackType === 'error') {
                     this.isLoadingProduct = false;
                     this.isLoading = true;
                 } else {

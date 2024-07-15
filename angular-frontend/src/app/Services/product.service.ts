@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Product } from '../Models/product.moddel';
+import { PersonProduct } from '../Models/person.products.model';
 
 @Injectable()
 export class ProductApiService {
@@ -48,11 +49,20 @@ export class ProductApiService {
         //.pipe(catchError((err) => this.handleError('PUT', err)));
     }
 
-    addProduct(peoduct: Product): Observable<Product> {
+    searchProducts(searchTerm: string): Observable<Product[]> {
+        let params = new HttpParams();
+        
+        // Aggiungi il termine di ricerca come parametro, se è definito
+        if (searchTerm) {
+          params = params.append('searchTerm', searchTerm);
+        }
+        // Eseguire la richiesta HTTP GET con i parametri di query
+        return this.http.get<Product[]>(`${this.baseURL}/filter`, { params }) 
+      }
+
+      addList(list: PersonProduct[]): Observable<PersonProduct>{
         const headers = { 'content-type': 'application/json' }
-        const body = JSON.stringify(peoduct);
-        console.log(body)
-        return this.http.post<Product>(this.baseURL + 'addproduct', body, { 'headers': headers })
-        //.pipe(catchError((err) => this.handleError('POST', err)));
+        const body = JSON.stringify(list);
+        return this.http.post<PersonProduct>(this.baseURL + 'addproductperson/', body, { 'headers': headers })
     }
 }

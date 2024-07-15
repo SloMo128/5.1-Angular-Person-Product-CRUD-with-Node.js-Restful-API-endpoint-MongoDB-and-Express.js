@@ -4,7 +4,8 @@ export class Product {
         public description: string,
         public price: string,
         public company: string,
+        public selected :boolean,
         public person?: string,
-        public _id?: string
+        public _id?: string,
     ){}
 }

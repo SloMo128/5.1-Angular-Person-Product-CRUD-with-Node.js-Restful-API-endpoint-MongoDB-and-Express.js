@@ -73,7 +73,7 @@ export class ProductAllListComponent implements OnInit {
     
     deleteProduct(id: string, index) {
         if (window.confirm("Are you sure you want to delete this product?")) {
-            this.productService.deleteProduct(id).subscribe({
+            /*this.productService.deleteProduct(id).subscribe({
                 next: (data) => {
                     this.products.splice(index, 1);
                 },
@@ -86,7 +86,7 @@ export class ProductAllListComponent implements OnInit {
                     };
                     throw new Error();
                 }
-            });
+            });*/
         }
     }
 

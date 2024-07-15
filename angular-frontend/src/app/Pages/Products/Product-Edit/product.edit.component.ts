@@ -15,7 +15,7 @@ export class ProductEditComponent implements OnInit {
 
     editForm: FormGroup;
     products: Product[] = []
-    product = new Product("", "", "", "");
+    product = new Product("", "", "", "", false);
     feedback = new FeedBack("", "");
     data: string;
     isLoading: boolean = true;
