@@ -61,30 +61,29 @@ export class ProductAddComponent implements OnInit {
         }
     }
 
-    
 
-    filterProducts(): void {
+
+    filterProducts() {
         let params = new HttpParams();
 
         if (this.searchForm.controls.search.value) {
             params = params.append('search', this.searchForm.controls.search.value);
         }
-
+        
+        this.products = [];
         this.productService.findByQueryOneSearch(params).subscribe({
             next: (data: Product[]) => {
-                
-                if (data.length !== 0) {
-                    this.products = data;
-                    this.initializeProductFormArray();
-                }
-                this.feedback = { feedbackType: 'success', feedbackmsg: 'Products filtered successfully' };
+                this.products = data;
+                this.initializeProductFormArray();
+                this.feedback = { feedbackType: 'success', feedbackmsg: 'filtered' };
             },
             error: (err: any) => {
+                // Handle any errors from the server
                 this.feedback = {
-                    feedbackType: 'error',
-                    feedbackmsg: 'Failed to fetch products. Please try again later.',
+                    feedbackType: err.type,
+                    feedbackmsg: err.msg,
                 };
-            },
+            }
         });
     }
 
@@ -93,7 +92,7 @@ export class ProductAddComponent implements OnInit {
         this.products.forEach((product) => {
             productFormArray.push(
                 this.fb.group({
-                    selected: false, // Initialize selected to false by default
+                    selected: false,
                     _id: product._id,
                     title: product.title,
                     description: product.description,

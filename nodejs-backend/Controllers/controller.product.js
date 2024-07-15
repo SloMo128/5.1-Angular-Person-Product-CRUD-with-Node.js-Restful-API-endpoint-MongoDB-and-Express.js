@@ -60,7 +60,7 @@ exports.addProductPerson = async (req, res) => {
     PersonProductModel.create(req.body)
         .then(pp => {
             res.send(pp)
-        }).catch(err =>{
+        }).catch(err => {
             res.status(500).send({
                 message: err.message || "Something went wrong while creating the Person."
             })
@@ -163,6 +163,36 @@ exports.update = (req, res) => {
                 message: `Error updating product with id ${id}`
             });
         });
+};
+
+//ELIMINA IL PRODOTTO SOLO NELLA PERSON
+exports.deleteInterazione = (req, res) => {
+    const personId = req.params.person_id;
+    const productId = req.params.product_id;
+    // Trova l'associazione specificata     
+    PersonProductModel.findOne({
+        person_id: personId,
+        product_id: productId
+    }).then(association => {
+        if (!association) {
+            return res.status(404).json({
+                message: `Associazione con person_id ${personId} e product_id ${productId} non trovata.`
+            });
+        }
+        // Elimina l'associazione trovata         
+        return PersonProductModel.findByIdAndDelete(association._id).
+            then(() => {
+                res.json({ message: `Associazione con person_id ${personId} e product_id ${productId} eliminata con successo.` });
+            }).catch(err => {
+                console.error(err.message || "Errore durante l'eliminazione dell'associazione.");
+                res.status(500).send({ message: err.message || "Errore durante l'eliminazione dell'associazione." });
+            });
+    }).catch(err => {
+        console.error(err.message || "Errore durante la ricerca dell'associazione.");
+        res.status(500).send({
+            message: err.message || "Errore durante la ricerca dell'associazione."
+        });
+    });
 };
 
 exports.delete = (req, res) => {

@@ -13,13 +13,13 @@ export class ProductApiService {
 
     constructor(private http: HttpClient) { }
 
-    findByQueryOneSearch(params: HttpParams ): Observable<Product[]> {
+    findByQueryOneSearch(params: HttpParams): Observable<Product[]> {
         //let params = new HttpParams();
         /*Object.keys(queryObj).forEach(key => {
             params = params.append(key, queryObj[key]);
         });*/
         //params = params.append('search', queryObj);
-        return this.http.get<Product[]>(this.baseURL + 'filter/', {params});
+        return this.http.get<Product[]>(this.baseURL + 'filter/', { params });
     }
 
     getProducts(id: string): Observable<Product[]> {
@@ -49,18 +49,24 @@ export class ProductApiService {
         //.pipe(catchError((err) => this.handleError('PUT', err)));
     }
 
+    // Metodo per eliminare un'associazione PersonProd   
+    deleteAssociation(person_id: string, product_id: string): Observable<any> {
+        const url = `${this.baseURL}/delete/${person_id}/${product_id}`;
+        return this.http.delete<any>(url)
+    }
+
     searchProducts(searchTerm: string): Observable<Product[]> {
         let params = new HttpParams();
-        
+
         // Aggiungi il termine di ricerca come parametro, se è definito
         if (searchTerm) {
-          params = params.append('searchTerm', searchTerm);
+            params = params.append('searchTerm', searchTerm);
         }
         // Eseguire la richiesta HTTP GET con i parametri di query
-        return this.http.get<Product[]>(`${this.baseURL}/filter`, { params }) 
-      }
+        return this.http.get<Product[]>(`${this.baseURL}/filter`, { params })
+    }
 
-      addList(list: PersonProduct[]): Observable<PersonProduct>{
+    addList(list: PersonProduct[]): Observable<PersonProduct> {
         const headers = { 'content-type': 'application/json' }
         const body = JSON.stringify(list);
         return this.http.post<PersonProduct>(this.baseURL + 'addproductperson/', body, { 'headers': headers })

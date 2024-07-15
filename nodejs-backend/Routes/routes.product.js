@@ -8,14 +8,15 @@ productRoutes.post('/addproductperson', product.addProductPerson);
 productRoutes.get('/filter/', product.findProducts);
 
 productRoutes.get('/:person_id', product.findByQueryPersonProduct);
+
 productRoutes.put('/updateproduct/:id', product.update);
 
 productRoutes.get('/:id', product.findById);
 
-//productRoutes.get('/person/:person_id', product.findByQuery);
 //insert - using post to add a new product
 productRoutes.post('/addproduct', product.create);
 
+productRoutes.delete('/deleteInter/:person_id/:product_id', product.deleteInterazione);
 
 productRoutes.delete('/deleteproduct/:id', product.delete);
 

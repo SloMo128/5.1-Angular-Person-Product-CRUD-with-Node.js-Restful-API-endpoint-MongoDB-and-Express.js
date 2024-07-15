@@ -21,6 +21,7 @@ export class ProductListComponent implements OnInit {
     data: string;
     isLoggedIn: boolean = false;
     productsForm: FormGroup;
+    associations: any;
 
     constructor(
         private productService: ProductApiService,
@@ -84,22 +85,18 @@ export class ProductListComponent implements OnInit {
             },
         });
     }
+    // Metodo per eliminare un'associazione
+    deleteAssociation(personId: string, productId: string, index: number) {
 
-    deleteProduct(id: string, index) {
-
-        if (window.confirm("Are you sure you want to delete this product?")) {
-            this.productService.deleteProduct(id).subscribe({
-                next: (data) => {
-                    this.products.splice(index, 1);
-                },
-                error: (err: any) => {
-                    this.isLoadingProduct = false;
-                    console.log(err);
-                    this.feedback = {
-                        feedbackType: err.feedbackType,
-                        feedbackmsg: err.feedbackmsg,
-                    };
-                    throw new Error();
+        if (window.confirm("Are you sure you want to delete this association?")) {
+            this.productService.deleteAssociation(personId, productId).subscribe({
+                next: (response) => {
+                    // Rimuovi l'associazione dall'array           
+                    this.associations.splice(index, 1);
+                    // Aggiorna localStorage se necessario           
+                    localStorage.removeItem('products');
+                }, error: (error) => {
+                    console.error('Errore durante l\'eliminazione dell\'associazione', error);
                 }
             });
         }
