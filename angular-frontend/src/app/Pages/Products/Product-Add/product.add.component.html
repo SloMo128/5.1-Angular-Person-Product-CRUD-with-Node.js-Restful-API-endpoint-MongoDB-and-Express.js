@@ -29,8 +29,7 @@
                 </tr>
             </thead>
             <tbody formArrayName="products">
-                <tr *ngFor="let productCtrl of productsForm.controls.products.controls; let i = index"
-                    [formGroupName]="i">
+                <tr *ngFor="let productCtrl of productsForm.controls.products.controls; let i = index" [formGroupName]="i">
                     <td>{{productCtrl.value.title}}</td>
                     <td>{{productCtrl.value.description}}</td>
                     <td>{{productCtrl.value.company}}</td>
