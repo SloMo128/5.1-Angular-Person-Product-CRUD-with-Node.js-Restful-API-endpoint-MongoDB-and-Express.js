@@ -23,7 +23,7 @@ export class ProductApiService {
     }
 
     getPersonProduct(id: string): Observable<Product[]> {
-        return this.http.get<Product[]>(this.baseURL + id)
+        return this.http.get<Product[]>(this.baseURL +"/person/"+ id)
         //.pipe(catchError((err) => this.handleError('GetProduct', err)));
     }
 

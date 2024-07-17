@@ -29,7 +29,7 @@ const routes: Routes = [
 
   { path: 'productlist', component: ProductAllListComponent },
   { path: 'addproduct', component: ProductAddComponent },
-  { path: 'productedit', component: ProductEditComponent, canActivate: [ProductGuard]},
+  { path: 'updateproduct', component: ProductEditComponent, canActivate: [ProductGuard]},
   { path: 'productcreate', component: ProductCreateComponent },
   { path: 'cart', component: ProductListComponent},
 

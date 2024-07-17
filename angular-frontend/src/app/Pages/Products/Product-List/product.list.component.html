@@ -21,7 +21,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let product of products let i = index">
-      <td><a [routerLink]="['/productedit/']" (click)="saveDataAndNavigate(product._id)">{{product.title}}</a></td>
+      <td><a [routerLink]="['/updateproduct/']" (click)="saveDataAndNavigate(product._id)">{{product.title}}</a></td>
       <td>{{product.description}}</td>
       <td>{{product.company}}</td>
       <td>{{product.price}}</td>

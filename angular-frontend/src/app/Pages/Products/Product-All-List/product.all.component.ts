@@ -92,6 +92,6 @@ export class ProductAllListComponent implements OnInit {
 
     saveDataAndNavigate(id: string) {
         localStorage.setItem('productId', id);
-        this.router.navigate(['/']);
+        this.router.navigate(['/updateproduct']);
     }
 }

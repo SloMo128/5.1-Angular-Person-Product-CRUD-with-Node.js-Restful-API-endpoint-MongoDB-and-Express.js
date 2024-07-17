@@ -5,11 +5,11 @@ const product = require('../Controllers/controller.product');
 // POST per aggiungere una lista di prodotti
 productRoutes.post('/addproductperson', product.addProductPerson);
 
+productRoutes.put('/updateproduct/:id', product.update);
+
 productRoutes.get('/filter/', product.findProducts);
 
-productRoutes.get('/:person_id', product.findByQueryPersonProduct);
-
-productRoutes.put('/updateproduct/:id', product.update);
+productRoutes.get('/person/:person_id', product.findByQueryPersonProduct);
 
 productRoutes.get('/:id', product.findById);
 

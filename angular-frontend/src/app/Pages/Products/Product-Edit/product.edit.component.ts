@@ -68,7 +68,7 @@ export class ProductEditComponent implements OnInit {
         this.productService.updateProduct(this.data, this.editForm.value).subscribe({
             next: (data) => {
                 this.feedback = { feedbackType: 'success', feedbackmsg: 'Porduct updated successfully!' };
-                setTimeout(() => this.router.navigate(['/personedit']), 4000);
+                setTimeout(() => this.router.navigate(['/updateperson']), 4000);
 
                 localStorage.removeItem('productId');
             },
