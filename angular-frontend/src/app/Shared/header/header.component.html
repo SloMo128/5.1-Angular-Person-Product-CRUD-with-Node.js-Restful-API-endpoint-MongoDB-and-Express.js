@@ -11,13 +11,13 @@
         <li class="nav-item active">
           <a class="nav-link" routerLinkActive="active" routerLink="/home">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAdm">
           <a class="nav-link" routerLinkActive="active" routerLink="/listperson">View People</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAdm">
           <a class="nav-link" routerLinkActive="active" routerLink="/personcreate">Add Person</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isSal">
           <a class="nav-link" routerLinkActive="active" routerLink="/productlist">Search - ADD Product</a>
         </li>
         <li class="nav-item">
@@ -27,6 +27,11 @@
           <ng-template #isLogOut>
             <a class="nav-link" routerLink="/login">Login</a>
           </ng-template>
+        </li>
+        <li class="nav-item" *ngIf="isUsr">
+          <a class="nav-link" routerLinkActive="active" routerLink="/cart">
+            <img src="assets\img\cart.png" Style="width:30px;height:30px" />
+          </a>
         </li>
       </ul>
     </div>

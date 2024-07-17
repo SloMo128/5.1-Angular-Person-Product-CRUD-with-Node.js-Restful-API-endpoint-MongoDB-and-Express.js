@@ -17,5 +17,7 @@ export class LogoutComponent implements OnInit {
       .then(() => {
          window.location.reload();
        });
+
+       localStorage.removeItem("personId");
    }
 }

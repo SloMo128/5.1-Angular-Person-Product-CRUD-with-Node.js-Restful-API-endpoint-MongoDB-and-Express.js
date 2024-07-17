@@ -21,8 +21,10 @@ export class ProductListComponent implements OnInit {
     data: string;
     isLoggedIn: boolean = false;
     productsForm: FormGroup;
-    associations: any;
     personId: string;
+    isUsr: boolean = false;
+    isAdm: boolean = false
+    isSal: boolean = false
 
     constructor(
         private productService: ProductApiService,
@@ -52,10 +54,12 @@ export class ProductListComponent implements OnInit {
         let storeDataSal = localStorage.getItem("isSalLoggedIn");
         let storeDataUsr = localStorage.getItem("isUsrLoggedIn");
 
-        if (storeDataUsr != null && storeDataUsr == "true" || storeDataAdm != null && storeDataAdm == "true") {
-            this.isLoggedIn = false;
+        if (storeDataUsr != null && storeDataUsr == "true") {
+            this.isUsr = true;
+        } else if (storeDataAdm != null && storeDataAdm == "true") {
+            this.isAdm = true;
         } else if (storeDataSal != null && storeDataSal == "true") {
-            this.isLoggedIn = true;
+            this.isSal = true;
         }
     }
 
@@ -86,7 +90,7 @@ export class ProductListComponent implements OnInit {
             },
         });
     }
-    
+
     // Metodo per eliminare un'associazione
     deleteAssociation(productId: string, index: number) {
         this.personId = this.data;
@@ -106,6 +110,6 @@ export class ProductListComponent implements OnInit {
 
     saveDataAndNavigate(id: string) {
         localStorage.setItem('productId', id);
-        this.router.navigate(['/productedit/']);
+        this.router.navigate(['/']);
     }
 }

@@ -16,6 +16,7 @@ import { ProductAddComponent } from '../Pages/Products/Product-Add/product.add.c
 import { LoginComponent } from '../Authentication/login.component';
 import { LogoutComponent } from '../Authentication/logout.component';
 import { ProductGuard } from '../Authentication/product.guard';
+import { ProductListComponent } from '../Pages/Products/Product-List/product.list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'addproduct', component: ProductAddComponent },
   { path: 'productedit', component: ProductEditComponent, canActivate: [ProductGuard]},
   { path: 'productcreate', component: ProductCreateComponent },
+  { path: 'cart', component: ProductListComponent},
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

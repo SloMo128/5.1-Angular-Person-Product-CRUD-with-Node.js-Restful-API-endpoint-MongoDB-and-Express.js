@@ -14,8 +14,6 @@ productRoutes.put('/updateproduct/:id', product.update);
 productRoutes.get('/:id', product.findById);
 
 //insert - using post to add a new product
-productRoutes.post('/addproduct', product.create);
-
 productRoutes.delete('/deleteInter/:person_id/:product_id', product.deleteInterazione);
 
 productRoutes.delete('/deleteproduct/:id', product.delete);

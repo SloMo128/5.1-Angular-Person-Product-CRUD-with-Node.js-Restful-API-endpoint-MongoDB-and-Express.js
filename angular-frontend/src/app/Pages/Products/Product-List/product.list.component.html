@@ -16,7 +16,7 @@
       <th>Description</th>
       <th>Company</th>
       <th>Price</th>
-      <th *ngIf="isLoggedIn">Update</th>
+      <th class="text-center" *ngIf="isUsr || isAdm">Update</th>
     </tr>
   </thead>
   <tbody>
@@ -26,18 +26,17 @@
       <td>{{product.company}}</td>
       <td>{{product.price}}</td>
 
-      <td class="text-center" *ngIf="isLoggedIn">
+      <td class="text-center">
 
         <button type="submit" (click)="saveDataAndNavigate(product._id)" style="background-color:rgb(22, 218, 22)"
-          class="btn btn-success">
+          class="btn btn-success" *ngIf="isAdm">
           <img src="assets\img\edit.png" Style="width:30px;height:30px" />
         </button>
 
-        <button type="submit" (click)="deleteAssociation(product._id, i)" style="background-color:red"
-          class="btn btn-danger">
+        <button  type="submit" (click)="deleteAssociation(product._id, i)" style="background-color:red"
+          class="btn btn-danger" *ngIf="isUsr || isAdm">
           <img src="assets\img\delete.png" Style="width:30px;height:30px" />
         </button>
-
       </td>
     </tr>
   </tbody>

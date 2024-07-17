@@ -24,6 +24,7 @@ export class ProductAddComponent implements OnInit {
     productsForm: FormGroup;
     list: PersonProduct[] = [];
     personId: string;
+    userPersonId: string;
 
     constructor(
         private productService: ProductApiService,
@@ -86,6 +87,7 @@ export class ProductAddComponent implements OnInit {
             }
         });
     }
+    
 
     initializeProductFormArray(): void {
         const productFormArray = this.productsForm.get('products') as FormArray;

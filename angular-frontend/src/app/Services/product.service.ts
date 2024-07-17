@@ -14,11 +14,6 @@ export class ProductApiService {
     constructor(private http: HttpClient) { }
 
     findByQueryOneSearch(params: HttpParams): Observable<Product[]> {
-        //let params = new HttpParams();
-        /*Object.keys(queryObj).forEach(key => {
-            params = params.append(key, queryObj[key]);
-        });*/
-        //params = params.append('search', queryObj);
         return this.http.get<Product[]>(this.baseURL + 'filter/', { params });
     }
 
@@ -62,8 +57,10 @@ export class ProductApiService {
         if (searchTerm) {
             params = params.append('searchTerm', searchTerm);
         }
+
         // Eseguire la richiesta HTTP GET con i parametri di query
         return this.http.get<Product[]>(`${this.baseURL}/filter`, { params })
+
     }
 
     addList(list: PersonProduct[]): Observable<PersonProduct> {

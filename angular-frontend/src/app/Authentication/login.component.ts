@@ -14,7 +14,7 @@ import { FeedBack } from '../Models/feedback';
 export class LoginComponent implements OnInit {
 
    formData: FormGroup;
-   userLogin = new UserLogin('', '');
+   userLogin = new UserLogin('', '', '');
    feedback = new FeedBack("", "");
    addForm: FormGroup;
    isLoading: boolean = true;
@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
                      window.location.reload();
                   });
             }*/
+            
             switch (this.userLogin.profile_code) {
                case 'SAL':
                   localStorage.setItem('isSalLoggedIn', "true");
@@ -64,6 +65,7 @@ export class LoginComponent implements OnInit {
                   localStorage.setItem('isUsrLoggedIn', "true");
                   this.router.navigate(['/'])
                      .then(() => {
+                        localStorage.setItem("personId", this.userLogin._id);
                         window.location.reload();
                      });
                   break;
